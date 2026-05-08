@@ -1,0 +1,247 @@
+// =============================================================================
+// PantryChef — Prisma schema
+//
+// Conventions
+// - All tables live in the `public` schema. `auth.users` is owned by Supabase.
+// - `users.id` mirrors `auth.users.id` (UUID). A Postgres trigger (defined in
+//   supabase/migrations/0001_init.sql) inserts the `users` row on signup.
+// - Field-level @map keeps DB columns snake_case while the TS API stays camelCase.
+// - Prisma uses `directUrl` automatically for migrations (port 5432) and
+//   `url` for runtime (PgBouncer pooled, port 6543).
+// =============================================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// -----------------------------------------------------------------------------
+// Enums
+// -----------------------------------------------------------------------------
+
+enum SpiceTolerance {
+  none
+  mild
+  medium
+  hot
+  extra_hot
+
+  @@map("spice_tolerance")
+}
+
+enum CookingSkill {
+  beginner
+  intermediate
+  advanced
+
+  @@map("cooking_skill")
+}
+
+enum DietaryPreference {
+  none
+  vegetarian
+  vegan
+  pescatarian
+  halal
+
+  @@map("dietary_preference")
+}
+
+enum Difficulty {
+  easy
+  medium
+  hard
+
+  @@map("difficulty")
+}
+
+enum SpiceLevel {
+  none
+  mild
+  medium
+  hot
+  extra_hot
+
+  @@map("spice_level")
+}
+
+enum MealType {
+  breakfast
+  lunch
+  dinner
+  snack
+  dessert
+  side
+
+  @@map("meal_type")
+}
+
+enum Cuisine {
+  pakistani
+  indo_chinese
+  chinese
+  japanese
+  italian
+  western
+
+  @@map("cuisine")
+}
+
+// -----------------------------------------------------------------------------
+// Users + preferences
+// -----------------------------------------------------------------------------
+
+model User {
+  id                  String             @id @db.Uuid
+  email               String             @unique
+  fullName            String?            @map("full_name")
+  avatarUrl           String?            @map("avatar_url")
+  spiceTolerance      SpiceTolerance?    @map("spice_tolerance")
+  cookingSkill        CookingSkill?      @map("cooking_skill")
+  dietaryPreference   DietaryPreference? @map("dietary_preference")
+  onboardingCompleted Boolean            @default(false) @map("onboarding_completed")
+  createdAt           DateTime           @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt           DateTime           @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  preferences  UserPreferences?
+  pantryItems  PantryItem[]
+  savedRecipes SavedRecipe[]
+
+  @@map("users")
+}
+
+model UserPreferences {
+  id                  String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId              String    @unique @map("user_id") @db.Uuid
+  cuisinePreferences  Cuisine[] @default([]) @map("cuisine_preferences")
+  favoriteIngredients String[]  @default([]) @map("favorite_ingredients")
+  dislikedIngredients String[]  @default([]) @map("disliked_ingredients")
+  createdAt           DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt           DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_preferences")
+}
+
+// -----------------------------------------------------------------------------
+// Pantry
+// -----------------------------------------------------------------------------
+
+model PantryItem {
+  id             String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId         String   @map("user_id") @db.Uuid
+  ingredientName String   @map("ingredient_name")
+  normalizedName String   @map("normalized_name")
+  quantity       Decimal? @db.Decimal(10, 2)
+  unit           String?
+  lowStock       Boolean  @default(false) @map("low_stock")
+  staple         Boolean  @default(false)
+  createdAt      DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt      DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, normalizedName])
+  @@index([userId])
+  @@index([normalizedName])
+  @@map("pantry_items")
+}
+
+// -----------------------------------------------------------------------------
+// Recipes
+// -----------------------------------------------------------------------------
+
+model Recipe {
+  id          String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  slug        String     @unique
+  title       String
+  description String?
+  cuisine     Cuisine
+  prepTime    Int        @map("prep_time")
+  cookTime    Int        @map("cook_time")
+  totalTime   Int        @map("total_time")
+  difficulty  Difficulty
+  spiceLevel  SpiceLevel @default(none) @map("spice_level")
+  mealType    MealType[] @default([]) @map("meal_type")
+  servings    Int        @default(2)
+  imageUrl    String?    @map("image_url")
+  vegetarian  Boolean    @default(false)
+  calories    Int?
+  tags        String[]   @default([])
+  createdAt   DateTime   @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime   @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  ingredients RecipeIngredient[]
+  steps       RecipeStep[]
+  savedBy     SavedRecipe[]
+
+  @@index([cuisine])
+  @@index([vegetarian])
+  @@index([difficulty])
+  @@index([totalTime])
+  @@map("recipes")
+}
+
+model RecipeIngredient {
+  id             String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  recipeId       String   @map("recipe_id") @db.Uuid
+  ingredientName String   @map("ingredient_name")
+  normalizedName String   @map("normalized_name")
+  quantity       Decimal? @db.Decimal(10, 2)
+  unit           String?
+  required       Boolean  @default(true)
+  notes          String?
+
+  recipe Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+
+  @@index([recipeId])
+  @@index([normalizedName])
+  @@map("recipe_ingredients")
+}
+
+model RecipeStep {
+  id          String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  recipeId    String @map("recipe_id") @db.Uuid
+  stepNumber  Int    @map("step_number")
+  instruction String
+
+  recipe Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+
+  @@unique([recipeId, stepNumber])
+  @@index([recipeId])
+  @@map("recipe_steps")
+}
+
+model SavedRecipe {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId    String   @map("user_id") @db.Uuid
+  recipeId  String   @map("recipe_id") @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  recipe Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, recipeId])
+  @@index([userId])
+  @@map("saved_recipes")
+}
+
+// -----------------------------------------------------------------------------
+// Ingredient aliases — backbone of the normalization system
+// -----------------------------------------------------------------------------
+
+model IngredientAlias {
+  id             String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  alias          String   @unique
+  normalizedName String   @map("normalized_name")
+  createdAt      DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  @@index([normalizedName])
+  @@map("ingredient_aliases")
+}
