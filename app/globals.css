@@ -125,8 +125,20 @@
     font-family: var(--font-sans);
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     min-height: 100svh;
+    /* Respect iOS notch / Android cutout in landscape and on rounded displays. */
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    overflow-x: hidden;
   }
   ::selection {
     background-color: color-mix(in oklch, var(--primary) 25%, transparent);
+  }
+}
+
+/* Bump horizontal page padding on phones so cards don't hug the screen edge. */
+@media (max-width: 640px) {
+  main {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
   }
 }
