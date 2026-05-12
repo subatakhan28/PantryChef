@@ -121,6 +121,7 @@ model UserPreferences {
   cuisinePreferences  Cuisine[] @default([]) @map("cuisine_preferences")
   favoriteIngredients String[]  @default([]) @map("favorite_ingredients")
   dislikedIngredients String[]  @default([]) @map("disliked_ingredients")
+  disabledStaples     String[]  @default([]) @map("disabled_staples")
   createdAt           DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
   updatedAt           DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
 

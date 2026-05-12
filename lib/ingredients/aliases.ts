@@ -129,6 +129,66 @@ export const INGREDIENT_ALIASES: IngredientAlias[] = [
   { alias: "anda", normalized: "egg" },
   { alias: "tofu", normalized: "tofu" },
 
+  // ---------- Beef cuts ----------
+  { alias: "ribeye", normalized: "ribeye" },
+  { alias: "rib eye", normalized: "ribeye" },
+  { alias: "ribeye steak", normalized: "ribeye" },
+  { alias: "sirloin", normalized: "sirloin" },
+  { alias: "sirloin steak", normalized: "sirloin" },
+  { alias: "top sirloin", normalized: "sirloin" },
+  { alias: "tenderloin", normalized: "beef tenderloin" },
+  { alias: "beef tenderloin", normalized: "beef tenderloin" },
+  { alias: "filet mignon", normalized: "beef tenderloin" },
+  { alias: "brisket", normalized: "brisket" },
+  { alias: "beef brisket", normalized: "brisket" },
+  { alias: "chuck", normalized: "chuck roast" },
+  { alias: "chuck roast", normalized: "chuck roast" },
+  { alias: "beef chuck", normalized: "chuck roast" },
+  { alias: "flank", normalized: "flank steak" },
+  { alias: "flank steak", normalized: "flank steak" },
+  { alias: "skirt steak", normalized: "skirt steak" },
+  { alias: "short rib", normalized: "short rib" },
+  { alias: "short ribs", normalized: "short rib" },
+  { alias: "beef ribs", normalized: "beef ribs" },
+  { alias: "beef shank", normalized: "beef shank" },
+  { alias: "bong gosht", normalized: "beef shank" },
+  { alias: "nihari cut", normalized: "beef shank" },
+  { alias: "t-bone", normalized: "t-bone steak" },
+  { alias: "t-bone steak", normalized: "t-bone steak" },
+  { alias: "stew meat", normalized: "stew meat" },
+  { alias: "beef stew meat", normalized: "stew meat" },
+
+  // ---------- Lamb cuts ----------
+  { alias: "lamb chop", normalized: "lamb chop" },
+  { alias: "lamb chops", normalized: "lamb chop" },
+  { alias: "lamb shoulder", normalized: "lamb shoulder" },
+  { alias: "leg of lamb", normalized: "leg of lamb" },
+  { alias: "lamb leg", normalized: "leg of lamb" },
+  { alias: "lamb shank", normalized: "lamb shank" },
+  { alias: "ground lamb", normalized: "ground lamb" },
+  { alias: "lamb mince", normalized: "ground lamb" },
+  { alias: "lamb keema", normalized: "ground lamb" },
+  { alias: "rack of lamb", normalized: "rack of lamb" },
+  { alias: "lamb rack", normalized: "rack of lamb" },
+  { alias: "lamb ribs", normalized: "lamb ribs" },
+  { alias: "lamb chop boneless", normalized: "lamb chop" },
+
+  // ---------- Mutton / goat cuts ----------
+  { alias: "mutton chop", normalized: "mutton chop" },
+  { alias: "mutton chops", normalized: "mutton chop" },
+  { alias: "mutton leg", normalized: "mutton leg" },
+  { alias: "raan", normalized: "mutton leg" },
+  { alias: "goat", normalized: "goat" },
+  { alias: "goat meat", normalized: "goat" },
+  { alias: "bakra", normalized: "goat" },
+  { alias: "chevon", normalized: "goat" },
+  { alias: "goat shoulder", normalized: "goat shoulder" },
+  { alias: "goat leg", normalized: "goat leg" },
+  { alias: "goat curry cut", normalized: "goat" },
+  { alias: "goat chops", normalized: "goat chop" },
+  { alias: "goat chop", normalized: "goat chop" },
+  { alias: "goat shank", normalized: "goat shank" },
+
   // ---------- Dairy ----------
   { alias: "milk", normalized: "milk" },
   { alias: "doodh", normalized: "milk" },
@@ -299,3 +359,17 @@ export const INGREDIENT_ALIASES: IngredientAlias[] = [
   { alias: "sesame seeds", normalized: "sesame seeds" },
   { alias: "til", normalized: "sesame seeds" },
 ];
+
+/**
+ * The set of all canonical (normalized) ingredient names — every distinct
+ * target that some alias maps to. Used to tell "this pantry item resolved to
+ * a known ingredient" from "this fell through fuzzy matching and is just
+ * cleaned free text".
+ */
+export const CANONICAL_INGREDIENTS: ReadonlySet<string> = new Set(
+  INGREDIENT_ALIASES.map((row) => row.normalized),
+);
+
+export function isCanonicalIngredient(normalizedName: string): boolean {
+  return CANONICAL_INGREDIENTS.has(normalizedName);
+}

@@ -139,6 +139,31 @@ export async function removePantryItem(input: RemovePantryInput): Promise<Action
   return ok;
 }
 
+export async function toggleStaple(
+  normalizedName: string,
+  enabled: boolean,
+): Promise<ActionState> {
+  if (!normalizedName) return { ok: false, error: "Invalid staple." };
+  const session = await requireOnboardedUser();
+
+  const prefs = await prisma.userPreferences.findUnique({
+    where: { userId: session.authId },
+  });
+  const current = new Set(prefs?.disabledStaples ?? []);
+  if (enabled) current.delete(normalizedName);
+  else current.add(normalizedName);
+
+  await prisma.userPreferences.upsert({
+    where: { userId: session.authId },
+    create: { userId: session.authId, disabledStaples: Array.from(current) },
+    update: { disabledStaples: Array.from(current) },
+  });
+
+  revalidatePath("/pantry");
+  revalidatePath("/suggest");
+  return ok;
+}
+
 export type IngredientSuggestion = {
   display: string;
   normalized: string;

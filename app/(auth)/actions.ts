@@ -61,16 +61,13 @@ export async function signUp(_prev: AuthState, formData: FormData): Promise<Auth
     password: parsed.data.password,
     options: {
       data: parsed.data.fullName ? { full_name: parsed.data.fullName } : undefined,
-      emailRedirectTo: `${clientEnv.NEXT_PUBLIC_SITE_URL}/auth/confirm?next=/onboarding`,
     },
   });
 
   if (error) return { error: error.message };
 
-  return {
-    message:
-      "Check your email to confirm your account. You can close this tab and click the link in the message.",
-  };
+  revalidatePath("/", "layout");
+  redirect("/onboarding");
 }
 
 // ---------------------------------------------------------------------------
@@ -92,26 +89,6 @@ export async function signIn(_prev: AuthState, formData: FormData): Promise<Auth
   const next = (formData.get("next") as string | null) || "/dashboard";
   revalidatePath("/", "layout");
   redirect(next.startsWith("/") ? next : "/dashboard");
-}
-
-// ---------------------------------------------------------------------------
-
-export async function signInWithGoogle(formData: FormData) {
-  const supabase = await createClient();
-  const next = (formData.get("next") as string | null) || "/dashboard";
-
-  const { data, error } = await supabase.auth.signInWithOAuth({
-    provider: "google",
-    options: {
-      redirectTo: `${clientEnv.NEXT_PUBLIC_SITE_URL}/auth/callback?next=${encodeURIComponent(next)}`,
-    },
-  });
-
-  if (error || !data.url) {
-    redirect(`/login?error=${encodeURIComponent(error?.message ?? "OAuth failed")}`);
-  }
-
-  redirect(data.url);
 }
 
 // ---------------------------------------------------------------------------

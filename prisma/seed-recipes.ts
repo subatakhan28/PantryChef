@@ -23,6 +23,7 @@ type SeedRecipe = {
   vegetarian: boolean;
   tags: string[];
   ingredients: SeedIngredient[];
+  steps: string[];
 };
 
 const RECIPES: SeedRecipe[] = [
@@ -49,6 +50,14 @@ const RECIPES: SeedRecipe[] = [
       { display: "cumin", normalized: "cumin", required: false },
       { display: "turmeric", normalized: "turmeric", required: false },
     ],
+    steps: [
+      "Rinse 1 cup lentils until the water runs clear.",
+      "Combine lentils, 3 cups water, 1 tsp turmeric, and salt in a pot. Bring to a boil, then simmer uncovered 20-25 min until soft.",
+      "Heat 2 tbsp oil in a small pan. Add 1 tsp cumin seeds and let them sizzle.",
+      "Add a chopped onion and 3 minced garlic cloves. Cook until golden.",
+      "Stir in a chopped tomato and cook 2 min, then pour the tempering into the lentils.",
+      "Simmer 5 min more. Taste, adjust salt, and serve hot with rice or roti.",
+    ],
   },
   {
     slug: "chicken-karahi",
@@ -71,6 +80,14 @@ const RECIPES: SeedRecipe[] = [
       { display: "green chili", normalized: "green chili", required: true },
       { display: "garam masala", normalized: "garam masala", required: false },
       { display: "cumin", normalized: "cumin", required: false },
+    ],
+    steps: [
+      "Heat 1/4 cup oil in a wok or wide pan over high heat.",
+      "Add 1 kg bone-in chicken pieces, sear 4-5 min until lightly browned.",
+      "Stir in 2 tbsp ginger-garlic paste and cook 1 min until fragrant.",
+      "Add 4 chopped tomatoes, 4-6 slit green chilies, 1 tsp cumin, salt to taste. Cover and cook 15 min, stirring occasionally.",
+      "Uncover and cook on high another 5-8 min, oil should separate.",
+      "Sprinkle 1 tsp garam masala and fresh ginger juliennes. Serve with naan.",
     ],
   },
   {
@@ -95,6 +112,14 @@ const RECIPES: SeedRecipe[] = [
       { display: "garlic", normalized: "garlic", required: false },
       { display: "garam masala", normalized: "garam masala", required: false },
     ],
+    steps: [
+      "Heat 1/4 cup oil in a pot. Brown 2 sliced onions until deep golden, 8-10 min.",
+      "Add 2 tbsp ginger-garlic paste and 500g cubed beef. Sear 5 min.",
+      "Add 3 chopped tomatoes, 1 tsp turmeric, 1 tsp chili powder, salt. Cook covered 10 min.",
+      "Pour in 3 cups water, lower heat, simmer 40-50 min until beef is tender.",
+      "Add 3 cubed potatoes and cook another 15-20 min until they're soft.",
+      "Finish with 1 tsp garam masala. Garnish with cilantro.",
+    ],
   },
   {
     slug: "chana-masala",
@@ -118,6 +143,14 @@ const RECIPES: SeedRecipe[] = [
       { display: "cumin", normalized: "cumin", required: false },
       { display: "garam masala", normalized: "garam masala", required: false },
     ],
+    steps: [
+      "Heat 3 tbsp oil. Add 1 tsp cumin seeds, let them pop.",
+      "Add 1 finely chopped onion, cook until golden brown.",
+      "Stir in 1 tbsp ginger-garlic paste, cook 1 min.",
+      "Add 2 pureed tomatoes, 1 tsp chili powder, 1/2 tsp turmeric, salt. Cook 5-7 min until oil separates.",
+      "Add 2 cans drained chickpeas and 1 cup water. Simmer 10 min.",
+      "Finish with 1 tsp garam masala and cilantro.",
+    ],
   },
   {
     slug: "egg-bhurji",
@@ -138,6 +171,13 @@ const RECIPES: SeedRecipe[] = [
       { display: "tomato", normalized: "tomato", required: true },
       { display: "green chili", normalized: "green chili", required: false },
       { display: "turmeric", normalized: "turmeric", required: false },
+    ],
+    steps: [
+      "Whisk 4 eggs with salt and 1/4 tsp turmeric.",
+      "Heat 1 tbsp oil. Sauté 1 chopped onion and 1 chopped green chili 3 min.",
+      "Add 1 chopped tomato, cook 2 min until soft.",
+      "Pour in eggs. Stir constantly with a spatula 2-3 min until just set.",
+      "Top with cilantro and serve with toast or paratha.",
     ],
   },
   {
@@ -162,6 +202,14 @@ const RECIPES: SeedRecipe[] = [
       { display: "garlic", normalized: "garlic", required: false },
       { display: "garam masala", normalized: "garam masala", required: false },
     ],
+    steps: [
+      "Heat 3 tbsp oil. Brown 1 chopped onion until golden.",
+      "Add 1 tbsp ginger-garlic paste, cook 1 min.",
+      "Add 500g ground beef. Break it up and cook 8 min until no pink remains.",
+      "Stir in 2 chopped tomatoes, 1 tsp chili powder, 1/2 tsp turmeric, salt. Cook 5 min.",
+      "Add 2 cubed potatoes and 1 cup water. Cover, simmer 15-20 min until potatoes are tender.",
+      "Finish with garam masala and cilantro.",
+    ],
   },
   {
     slug: "aloo-paratha",
@@ -182,6 +230,13 @@ const RECIPES: SeedRecipe[] = [
       { display: "onion", normalized: "onion", required: false },
       { display: "green chili", normalized: "green chili", required: false },
       { display: "cumin", normalized: "cumin", required: false },
+    ],
+    steps: [
+      "Mix 2 cups wheat flour with 3/4 cup water and a pinch of salt. Knead into soft dough, rest 15 min.",
+      "Boil 3 potatoes until soft, peel and mash. Mix with chopped onion, 1 green chili, 1 tsp cumin, salt.",
+      "Divide dough into balls. Roll a ball into a small disc, place 2 tbsp filling, seal and re-roll gently.",
+      "Cook on a hot griddle 1 min per side, brushing with ghee, until golden spots appear.",
+      "Serve hot with yogurt or pickle.",
     ],
   },
   {
@@ -205,6 +260,13 @@ const RECIPES: SeedRecipe[] = [
       { display: "ginger", normalized: "ginger", required: false },
       { display: "cumin", normalized: "cumin", required: false },
       { display: "garam masala", normalized: "garam masala", required: false },
+    ],
+    steps: [
+      "Blanch 500g spinach in boiling water 2 min, drain, and shock in cold water. Blend to a smooth puree.",
+      "Pan-fry 250g cubed paneer in 1 tbsp oil until golden on all sides. Set aside.",
+      "In the same pan, heat 2 tbsp oil. Sauté 1 chopped onion until golden, then add 1 tbsp ginger-garlic paste.",
+      "Add 1 tsp cumin, 1/2 tsp chili powder, salt. Cook 1 min, then add the spinach puree.",
+      "Simmer 5 min. Stir in 2 tbsp cream and the paneer. Finish with 1/2 tsp garam masala.",
     ],
   },
 
@@ -230,6 +292,14 @@ const RECIPES: SeedRecipe[] = [
       { display: "green onion", normalized: "green onion", required: false },
       { display: "cornstarch", normalized: "cornstarch", required: false },
     ],
+    steps: [
+      "Toss 500g cubed chicken with 1 egg, 3 tbsp cornstarch, salt, and pepper.",
+      "Deep-fry or shallow-fry in batches until golden and crisp. Drain on paper.",
+      "In a wok, heat 2 tbsp oil. Stir-fry 1 tbsp minced garlic and 1 tsp minced ginger for 30 sec.",
+      "Add 3 tbsp soy sauce, 2 tbsp ketchup, 1 tbsp vinegar, 1 tsp chili sauce, and 1/2 cup water. Bring to a simmer.",
+      "Slurry 1 tsp cornstarch in 2 tbsp water, stir in to thicken.",
+      "Toss the fried chicken in the sauce. Top with sliced green onions.",
+    ],
   },
   {
     slug: "veg-hakka-noodles",
@@ -251,6 +321,14 @@ const RECIPES: SeedRecipe[] = [
       { display: "soy sauce", normalized: "soy sauce", required: true },
       { display: "garlic", normalized: "garlic", required: true },
       { display: "green onion", normalized: "green onion", required: false },
+    ],
+    steps: [
+      "Boil 250g noodles per package directions. Drain, rinse with cold water, toss with 1 tsp oil.",
+      "Heat 2 tbsp oil in a wok on high. Stir-fry 4 minced garlic cloves 20 sec.",
+      "Add julienned vegetables (carrot, cabbage, bell pepper) and stir-fry 2-3 min — keep them crisp.",
+      "Add 2 tbsp soy sauce, 1 tbsp vinegar, 1 tsp chili sauce, salt, white pepper.",
+      "Toss in the noodles and stir-fry 2 min until coated and hot.",
+      "Top with sliced green onions and serve immediately.",
     ],
   },
   {
@@ -274,6 +352,14 @@ const RECIPES: SeedRecipe[] = [
       { display: "green chili", normalized: "green chili", required: false },
       { display: "cornstarch", normalized: "cornstarch", required: false },
     ],
+    steps: [
+      "Toss 250g cubed paneer with 2 tbsp cornstarch, salt, and pepper.",
+      "Shallow-fry until golden on all sides. Set aside.",
+      "Heat 2 tbsp oil. Stir-fry 1 tbsp minced garlic and 2 slit green chilies 20 sec.",
+      "Add 1 cubed onion and 1 cubed bell pepper, stir-fry 2 min.",
+      "Pour in 3 tbsp soy sauce, 2 tbsp ketchup, 1 tbsp chili sauce, 1/2 cup water. Simmer 1 min.",
+      "Add paneer, toss to coat, and finish with sliced green onions.",
+    ],
   },
   {
     slug: "schezwan-fried-rice",
@@ -295,6 +381,13 @@ const RECIPES: SeedRecipe[] = [
       { display: "schezwan sauce", normalized: "schezwan sauce", required: false },
       { display: "carrot", normalized: "carrot", required: false },
       { display: "green onion", normalized: "green onion", required: false },
+    ],
+    steps: [
+      "Use 3 cups cold day-old cooked rice — fresh rice goes mushy.",
+      "Heat 2 tbsp oil in a wok on high. Stir-fry 5 minced garlic cloves 20 sec.",
+      "Add diced carrots and any other firm vegetables, stir-fry 2 min.",
+      "Add the rice and 3 tbsp schezwan sauce, 1 tbsp soy sauce. Toss vigorously 2-3 min until heated through.",
+      "Top with chopped green onions.",
     ],
   },
 
@@ -319,6 +412,14 @@ const RECIPES: SeedRecipe[] = [
       { display: "green onion", normalized: "green onion", required: false },
       { display: "garlic", normalized: "garlic", required: false },
     ],
+    steps: [
+      "Use 2 cups cold day-old cooked rice.",
+      "Beat 2 eggs with a pinch of salt.",
+      "Heat 2 tbsp oil in a wok on high. Scramble the eggs quickly, then push to one side.",
+      "Add 2 minced garlic cloves to the empty side, sizzle 10 sec.",
+      "Add the rice, breaking up clumps. Stir-fry 2 min until grains separate.",
+      "Drizzle 2 tbsp soy sauce and 1 tsp sesame oil. Toss with green onions and serve.",
+    ],
   },
   {
     slug: "kung-pao-chicken",
@@ -341,6 +442,14 @@ const RECIPES: SeedRecipe[] = [
       { display: "ginger", normalized: "ginger", required: false },
       { display: "rice vinegar", normalized: "rice vinegar", required: false },
     ],
+    steps: [
+      "Marinate 400g cubed chicken with 1 tbsp soy sauce, 1 tbsp cornstarch, 1 tsp shaoxing wine for 10 min.",
+      "Mix sauce: 2 tbsp soy sauce, 1 tbsp vinegar, 1 tbsp sugar, 1 tsp cornstarch, 3 tbsp water.",
+      "Heat 2 tbsp oil in a wok. Fry 6 dried red chilies and 1 tsp Sichuan peppercorns 30 sec.",
+      "Add chicken, stir-fry 3-4 min until cooked through.",
+      "Add 3 minced garlic and 1 tsp grated ginger. Stir 30 sec.",
+      "Pour in the sauce, toss until thickened, then stir in 1/2 cup roasted peanuts.",
+    ],
   },
   {
     slug: "tomato-egg-stir-fry",
@@ -360,6 +469,14 @@ const RECIPES: SeedRecipe[] = [
       { display: "egg", normalized: "egg", required: true },
       { display: "green onion", normalized: "green onion", required: false },
       { display: "soy sauce", normalized: "soy sauce", required: false },
+    ],
+    steps: [
+      "Beat 4 eggs with a pinch of salt and 1 tsp soy sauce.",
+      "Cut 4 tomatoes into wedges.",
+      "Heat 2 tbsp oil in a wok on high. Scramble eggs until just set, then remove.",
+      "In the same wok, add a touch more oil. Stir-fry tomatoes 3-4 min until they release juices.",
+      "Add 1 tsp sugar, salt, and 1 tbsp water. Cook 1 min.",
+      "Return eggs, toss gently, and finish with green onions. Serve over rice.",
     ],
   },
 
@@ -381,6 +498,13 @@ const RECIPES: SeedRecipe[] = [
       { display: "egg", normalized: "egg", required: true },
       { display: "soy sauce", normalized: "soy sauce", required: true },
       { display: "mirin", normalized: "mirin", required: false },
+    ],
+    steps: [
+      "Whisk 4 eggs with 1 tbsp soy sauce, 1 tbsp mirin, 1 tsp sugar.",
+      "Heat a rectangular pan or small skillet on medium-low, brush lightly with oil.",
+      "Pour a thin layer of egg, swirl. When mostly set, roll from one side to the other.",
+      "Push the roll back, brush oil, pour another thin layer (lifting the roll to flow underneath). When set, roll again.",
+      "Repeat 3-4 times. Slice into thick pieces and serve.",
     ],
   },
   {
@@ -405,6 +529,14 @@ const RECIPES: SeedRecipe[] = [
       { display: "mirin", normalized: "mirin", required: false },
       { display: "dashi", normalized: "dashi", required: false },
     ],
+    steps: [
+      "Cook 2 cups rice. Keep warm.",
+      "In a small pan, combine 1/2 cup dashi (or water + dashi powder), 2 tbsp soy sauce, 2 tbsp mirin, 1 tsp sugar. Bring to a simmer.",
+      "Add 1 thinly sliced onion, simmer 3 min until softened.",
+      "Add 300g sliced chicken thigh. Cook 4-5 min until cooked through.",
+      "Beat 3 eggs lightly (not over-mixed). Pour over chicken in a swirl, cover, cook 1 min until eggs are just set.",
+      "Slide onto bowls of rice, top with green onion.",
+    ],
   },
   {
     slug: "miso-soup",
@@ -425,6 +557,12 @@ const RECIPES: SeedRecipe[] = [
       { display: "green onion", normalized: "green onion", required: false },
       { display: "dashi", normalized: "dashi", required: false },
     ],
+    steps: [
+      "Heat 3 cups dashi (or water + 1 tsp dashi powder) to a gentle simmer — do not boil.",
+      "Add 200g cubed soft tofu. Warm through, 2 min.",
+      "Take off the heat. Whisk 3 tbsp miso paste in a small bowl with a few tbsp of the hot broth, then stir back into the pot.",
+      "Top with sliced green onion and a few cubes of wakame if you have it. Serve immediately.",
+    ],
   },
   {
     slug: "onigiri",
@@ -443,6 +581,13 @@ const RECIPES: SeedRecipe[] = [
       { display: "rice", normalized: "rice", required: true },
       { display: "nori", normalized: "nori", required: true },
       { display: "tuna", normalized: "tuna", required: false, notes: "common filling" },
+    ],
+    steps: [
+      "Cook 2 cups short-grain rice. Let cool 5 min — still warm but handleable.",
+      "Mix any filling: 1 small can tuna with 1 tbsp mayo, or just a pinch of salt.",
+      "Wet your hands with salty water. Take 1/2 cup rice, flatten in your palm, place 1 tsp filling in center.",
+      "Fold rice over and press into a triangle shape, rotating in your hands.",
+      "Wrap a strip of nori around the base. Repeat for the rest.",
     ],
   },
 
@@ -467,6 +612,13 @@ const RECIPES: SeedRecipe[] = [
       { display: "parsley", normalized: "parsley", required: false },
       { display: "red chili", normalized: "red chili", required: false },
     ],
+    steps: [
+      "Boil 250g spaghetti in well-salted water until 1 min short of al dente. Reserve 1 cup pasta water.",
+      "Meanwhile, gently warm 1/3 cup olive oil with 6 thinly sliced garlic cloves and 1 tsp red chili flakes — keep it low, you want gold not brown.",
+      "Add the drained pasta to the pan with a splash of pasta water.",
+      "Toss vigorously over heat 1 min, adding more water as needed to emulsify into a glossy sauce.",
+      "Off heat, stir in chopped parsley. Plate and finish with more olive oil.",
+    ],
   },
   {
     slug: "pasta-carbonara",
@@ -487,6 +639,14 @@ const RECIPES: SeedRecipe[] = [
       { display: "bacon", normalized: "bacon", required: true },
       { display: "parmesan", normalized: "parmesan", required: true },
       { display: "black pepper", normalized: "black pepper", required: false },
+    ],
+    steps: [
+      "Boil 250g spaghetti in salted water until al dente. Reserve 1 cup pasta water.",
+      "Meanwhile, crisp 150g diced bacon in a dry pan over medium heat. Reserve rendered fat.",
+      "Whisk 2 whole eggs + 1 yolk with 1/2 cup grated parmesan and lots of cracked black pepper.",
+      "Drain pasta, add to the pan with the bacon (off heat). Toss to coat in fat.",
+      "Pour in the egg mixture, tossing continuously — residual heat cooks it into a silky sauce. Add splashes of pasta water for the right loose consistency.",
+      "Plate immediately, top with extra parmesan and pepper.",
     ],
   },
   {
@@ -509,6 +669,13 @@ const RECIPES: SeedRecipe[] = [
       { display: "olive oil", normalized: "olive oil", required: false },
       { display: "basil", normalized: "basil", required: false },
     ],
+    steps: [
+      "Boil 300g pasta in well-salted water until al dente.",
+      "Meanwhile, warm 3 tbsp olive oil with 4 sliced garlic cloves until just fragrant.",
+      "Add a 400g can of crushed tomatoes (or 4 fresh, blanched and peeled). Season with salt.",
+      "Simmer 12-15 min until thickened.",
+      "Toss the drained pasta in the sauce. Finish with torn basil leaves and a glug of olive oil.",
+    ],
   },
   {
     slug: "caprese-salad",
@@ -528,6 +695,13 @@ const RECIPES: SeedRecipe[] = [
       { display: "mozzarella", normalized: "mozzarella", required: true },
       { display: "basil", normalized: "basil", required: true },
       { display: "olive oil", normalized: "olive oil", required: false },
+    ],
+    steps: [
+      "Slice 3 ripe tomatoes and 200g fresh mozzarella into 1/4-inch rounds.",
+      "Arrange them alternating on a plate, slightly overlapping.",
+      "Tuck basil leaves between each slice.",
+      "Drizzle generously with olive oil. Season with flaky salt and cracked pepper.",
+      "Optional: a few drops of balsamic vinegar.",
     ],
   },
   {
@@ -550,6 +724,12 @@ const RECIPES: SeedRecipe[] = [
       { display: "olive oil", normalized: "olive oil", required: false },
       { display: "basil", normalized: "basil", required: false },
     ],
+    steps: [
+      "Dice 3 ripe tomatoes, toss with chopped basil, 1 tbsp olive oil, salt. Let sit 5 min to release juices.",
+      "Slice baguette or country bread into 1-inch slices. Toast or grill until golden.",
+      "While warm, rub each slice with a halved garlic clove.",
+      "Spoon the tomato mixture on top. Drizzle with more olive oil and serve immediately.",
+    ],
   },
 
   // ─────────── Western (6) ───────────
@@ -571,6 +751,13 @@ const RECIPES: SeedRecipe[] = [
       { display: "butter", normalized: "butter", required: false },
       { display: "milk", normalized: "milk", required: false },
     ],
+    steps: [
+      "Whisk 3 eggs with a pinch of salt until uniform.",
+      "Melt 1 tbsp butter in a non-stick pan over LOW heat.",
+      "Pour in the eggs. Wait 30 sec, then stir gently with a rubber spatula.",
+      "Keep moving the eggs every 20 sec or so, pulling curds from the edges.",
+      "Pull off the heat when still slightly underdone — residual heat finishes them. Season with pepper.",
+    ],
   },
   {
     slug: "cheese-omelet",
@@ -590,6 +777,13 @@ const RECIPES: SeedRecipe[] = [
       { display: "cheddar", normalized: "cheddar", required: true },
       { display: "butter", normalized: "butter", required: false },
     ],
+    steps: [
+      "Whisk 3 eggs with salt and a splash of water until fully combined.",
+      "Melt 1 tbsp butter in a non-stick pan over medium-low heat.",
+      "Pour in eggs. As they begin to set at the edges, tilt the pan and lift to let raw egg flow underneath.",
+      "When mostly set but still glossy on top, sprinkle 1/3 cup grated cheddar over one half.",
+      "Fold the other half over and slide onto a plate.",
+    ],
   },
   {
     slug: "grilled-cheese",
@@ -608,6 +802,13 @@ const RECIPES: SeedRecipe[] = [
       { display: "bread", normalized: "bread", required: true },
       { display: "cheddar", normalized: "cheddar", required: true },
       { display: "butter", normalized: "butter", required: false },
+    ],
+    steps: [
+      "Butter the outside of 2 bread slices generously.",
+      "Layer cheese (cheddar or a mix) between the unbuttered sides.",
+      "Place in a cold non-stick pan, then turn heat to medium-low.",
+      "Cook 3-4 min per side, pressing gently, until both sides are golden and the cheese is melted.",
+      "Rest 1 min, slice diagonally, serve.",
     ],
   },
   {
@@ -630,6 +831,14 @@ const RECIPES: SeedRecipe[] = [
       { display: "butter", normalized: "butter", required: false },
       { display: "maple syrup", normalized: "maple syrup", required: false },
     ],
+    steps: [
+      "Whisk 1.5 cups flour, 2 tbsp sugar, 2 tsp baking powder, 1/2 tsp salt.",
+      "In another bowl, whisk 1.25 cups milk, 1 egg, 3 tbsp melted butter.",
+      "Pour wet into dry. Stir just until combined — lumps are fine. Rest 5 min.",
+      "Heat a non-stick pan or griddle on medium. Lightly butter.",
+      "Pour 1/4 cup batter per pancake. Flip when bubbles form on top and edges look dry, ~2 min.",
+      "Cook other side 1-2 min. Serve with butter and maple syrup.",
+    ],
   },
   {
     slug: "french-toast",
@@ -650,6 +859,13 @@ const RECIPES: SeedRecipe[] = [
       { display: "milk", normalized: "milk", required: true },
       { display: "cinnamon", normalized: "cinnamon", required: false },
       { display: "maple syrup", normalized: "maple syrup", required: false },
+    ],
+    steps: [
+      "Whisk 3 eggs, 1/2 cup milk, 1 tbsp sugar, 1/2 tsp cinnamon, 1 tsp vanilla if you have it.",
+      "Heat a non-stick pan on medium with 1 tbsp butter.",
+      "Dip each slice of thick bread in the egg mixture — both sides, ~10 sec total.",
+      "Cook 2-3 min per side until deeply golden.",
+      "Serve hot with butter and maple syrup.",
     ],
   },
   {
@@ -672,11 +888,18 @@ const RECIPES: SeedRecipe[] = [
       { display: "lemon", normalized: "lemon", required: false },
       { display: "onion", normalized: "onion", required: false },
     ],
+    steps: [
+      "Boil 250g short pasta (penne, fusilli, shells) in salted water. Drain, rinse cold, drain again.",
+      "Drain 2 cans tuna and break up with a fork.",
+      "Whisk 1/3 cup mayo, juice of 1 lemon, 1 tsp Dijon, salt, pepper.",
+      "Combine pasta, tuna, finely diced onion, chopped celery if you have it. Pour the dressing and toss.",
+      "Chill 20 min before serving. Tastes better the next day.",
+    ],
   },
 ];
 
 async function main() {
-  console.log(`Seeding ${RECIPES.length} recipes…`);
+  console.log(`Seeding ${RECIPES.length} recipes with steps…`);
 
   for (const recipe of RECIPES) {
     const totalTime = recipe.prepTime + recipe.cookTime;
@@ -723,9 +946,18 @@ async function main() {
         notes: ing.notes ?? null,
       })),
     });
+
+    await prisma.recipeStep.deleteMany({ where: { recipeId: upserted.id } });
+    await prisma.recipeStep.createMany({
+      data: recipe.steps.map((instruction, idx) => ({
+        recipeId: upserted.id,
+        stepNumber: idx + 1,
+        instruction,
+      })),
+    });
   }
 
-  console.log(`Done. ${RECIPES.length} recipes seeded.`);
+  console.log(`Done. ${RECIPES.length} recipes seeded with steps.`);
 }
 
 main()

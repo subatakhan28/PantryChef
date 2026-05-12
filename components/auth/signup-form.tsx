@@ -6,35 +6,14 @@ import { signUp, type AuthState } from "@/app/(auth)/actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { GoogleButton } from "@/components/auth/google-button";
 
 const initialState: AuthState = {};
 
 export function SignupForm() {
   const [state, formAction] = useActionState(signUp, initialState);
 
-  if (state.message) {
-    return (
-      <div className="rounded-md border bg-muted/40 p-4 text-sm">
-        <p className="font-medium">Check your inbox</p>
-        <p className="mt-1 text-muted-foreground">{state.message}</p>
-      </div>
-    );
-  }
-
   return (
     <div className="space-y-4">
-      <GoogleButton />
-
-      <div className="relative">
-        <div className="absolute inset-0 flex items-center">
-          <span className="w-full border-t" />
-        </div>
-        <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-card px-2 text-muted-foreground">or</span>
-        </div>
-      </div>
-
       <form action={formAction} className="space-y-4">
         <div className="space-y-2">
           <Label htmlFor="fullName">Full name</Label>

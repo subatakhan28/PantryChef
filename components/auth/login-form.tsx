@@ -6,7 +6,6 @@ import { signIn, type AuthState } from "@/app/(auth)/actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { GoogleButton } from "@/components/auth/google-button";
 
 const initialState: AuthState = {};
 
@@ -15,17 +14,6 @@ export function LoginForm({ next }: { next?: string }) {
 
   return (
     <div className="space-y-4">
-      <GoogleButton next={next} />
-
-      <div className="relative">
-        <div className="absolute inset-0 flex items-center">
-          <span className="w-full border-t" />
-        </div>
-        <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-card px-2 text-muted-foreground">or</span>
-        </div>
-      </div>
-
       <form action={formAction} className="space-y-4">
         {next ? <input type="hidden" name="next" value={next} /> : null}
 

@@ -1,4 +1,5 @@
 import type { Cuisine, DietaryPreference, SpiceLevel } from "@prisma/client";
+import { effectiveStaples } from "@/lib/staples";
 
 export type MatchableRecipe = {
   id: string;
@@ -24,6 +25,7 @@ export type MatchResult = {
 export type MatchOptions = {
   pantry: Set<string>;
   staples: Set<string>;
+  disabledStaples?: string[];
   cuisinePreferences?: Cuisine[];
   dietaryPreference?: DietaryPreference | null;
   dislikedIngredients?: string[];
@@ -32,7 +34,11 @@ export type MatchOptions = {
 };
 
 export function rankRecipes(recipes: MatchableRecipe[], options: MatchOptions): MatchResult[] {
-  const have = new Set<string>([...options.pantry, ...options.staples]);
+  const have = new Set<string>([
+    ...options.pantry,
+    ...options.staples,
+    ...effectiveStaples(options.disabledStaples),
+  ]);
   const disliked = new Set(options.dislikedIngredients ?? []);
   const cuisinePref = new Set(options.cuisinePreferences ?? []);
   const dietary = options.dietaryPreference;

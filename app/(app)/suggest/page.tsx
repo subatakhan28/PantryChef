@@ -80,6 +80,7 @@ export default async function SuggestPage() {
   const matches = rankRecipes(matchable, {
     pantry,
     staples,
+    disabledStaples: prefs?.disabledStaples ?? [],
     cuisinePreferences: prefs?.cuisinePreferences ?? [],
     dietaryPreference: session.record.dietaryPreference,
     dislikedIngredients: prefs?.dislikedIngredients ?? [],
@@ -132,7 +133,11 @@ function Header() {
 function SuggestionCard({ match }: { match: MatchResult }) {
   const matchPct = Math.round(match.matchPct * 100);
   return (
-    <Card className="h-full">
+    <Link
+      href={`/recipes/${match.recipe.slug}`}
+      className="block h-full transition-transform hover:-translate-y-0.5"
+    >
+      <Card className="h-full hover:shadow-md">
       <CardHeader>
         <div className="flex items-start justify-between gap-2">
           <CardTitle className="text-base leading-snug">{match.recipe.title}</CardTitle>
@@ -178,6 +183,7 @@ function SuggestionCard({ match }: { match: MatchResult }) {
           </div>
         )}
       </CardContent>
-    </Card>
+      </Card>
+    </Link>
   );
 }

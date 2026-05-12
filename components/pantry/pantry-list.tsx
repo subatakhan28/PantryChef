@@ -33,6 +33,7 @@ export type PantryItemView = {
   unit: string | null;
   lowStock: boolean;
   staple: boolean;
+  mapped: boolean;
 };
 
 export function PantryList({ items }: { items: PantryItemView[] }) {
@@ -145,11 +146,19 @@ function Row({ item, onEdit }: { item: PantryItemView; onEdit: () => void }) {
       <div className="flex min-w-0 flex-col gap-0.5">
         <div className="flex items-center gap-2">
           <span className="truncate text-sm font-medium">{item.ingredientName}</span>
-          {item.normalizedName !== item.ingredientName.trim().toLowerCase() && (
+          {!item.mapped ? (
+            <Badge
+              variant="outline"
+              className="border-amber-300 text-[10px] font-normal text-amber-700"
+              title="Not in our ingredient list — recipes won't match this. Try a more common name (e.g. 'tomato' instead of 'roma tomatoes')."
+            >
+              unmapped
+            </Badge>
+          ) : item.normalizedName !== item.ingredientName.trim().toLowerCase() ? (
             <Badge variant="outline" className="text-[10px] font-normal">
               {item.normalizedName}
             </Badge>
-          )}
+          ) : null}
         </div>
         <div className="flex items-center gap-3 text-xs text-muted-foreground">
           {quantityLabel && <span>{quantityLabel}</span>}
