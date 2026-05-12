@@ -44,13 +44,13 @@ export default async function PantryPage() {
       </header>
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(320px,400px)] lg:gap-8">
-        <div className="flex flex-col gap-6">
+        <aside className="lg:col-start-2 lg:row-start-1 lg:sticky lg:top-20 lg:self-start">
+          <PantryAddForm />
+        </aside>
+        <div className="flex flex-col gap-6 lg:col-start-1 lg:row-start-1">
           <StaplesPanel disabledStaples={prefs?.disabledStaples ?? []} />
           <PantryList items={view} />
         </div>
-        <aside className="lg:sticky lg:top-20 lg:self-start">
-          <PantryAddForm />
-        </aside>
       </div>
     </main>
   );

@@ -8,8 +8,15 @@ export const metadata: Metadata = {
     template: "%s · PantryChef",
   },
   description:
-    "PantryChef recommends recipes based on the ingredients in your kitchen, with AI-powered substitutions and tweaks.",
+    "PantryChef ranks recipes by how close you are to making each one, based on the ingredients in your kitchen.",
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  appleWebApp: {
+    capable: true,
+    title: "PantryChef",
+    statusBarStyle: "default",
+  },
+  applicationName: "PantryChef",
+  formatDetection: { telephone: false },
 };
 
 export const viewport: Viewport = {
@@ -19,6 +26,8 @@ export const viewport: Viewport = {
   ],
   width: "device-width",
   initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({

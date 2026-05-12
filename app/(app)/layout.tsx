@@ -4,6 +4,7 @@ import { ChefHat } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { Button } from "@/components/ui/button";
 import { AppNav } from "./app-nav";
+import { BottomNav } from "./bottom-nav";
 
 export default async function AppLayout({
   children,
@@ -38,7 +39,8 @@ export default async function AppLayout({
           </div>
         </div>
       </header>
-      <div className="flex-1">{children}</div>
+      <div className="flex-1 pb-20 sm:pb-0">{children}</div>
+      <BottomNav />
     </div>
   );
 }
