@@ -36,13 +36,13 @@ export default function LandingPage() {
             PantryChef looks at the ingredients in your kitchen and ranks recipes you can
             actually make tonight. From karahi to katsu curry — no more dinner indecision.
           </p>
-          <div className="mt-10 flex items-center justify-center gap-3">
-            <Button asChild size="lg">
+          <div className="mx-auto mt-10 flex w-full max-w-md flex-col items-stretch justify-center gap-3 sm:max-w-none sm:flex-row sm:items-center">
+            <Button asChild size="lg" className="w-full sm:w-auto">
               <Link href="/signup">
                 Start cooking <ArrowRight className="ml-1 size-4" />
               </Link>
             </Button>
-            <Button asChild variant="outline" size="lg">
+            <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
               <Link href="/login">I already have an account</Link>
             </Button>
           </div>
