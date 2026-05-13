@@ -123,11 +123,25 @@ function Section({
 
 function Row({ item, onEdit }: { item: PantryItemView; onEdit: () => void }) {
   const [busy, startTransition] = React.useTransition();
+  // Optimistic local copy so flag toggles flip the moment the user taps,
+  // instead of waiting for the server round-trip. We revert on failure.
+  const [optimistic, setOptimistic] = React.useState({
+    staple: item.staple,
+    lowStock: item.lowStock,
+  });
+  React.useEffect(() => {
+    setOptimistic({ staple: item.staple, lowStock: item.lowStock });
+  }, [item.staple, item.lowStock]);
 
   function handleToggle(field: "lowStock" | "staple", value: boolean) {
+    const prev = optimistic;
+    setOptimistic({ ...optimistic, [field]: value });
     startTransition(async () => {
       const result = await togglePantryFlag({ id: item.id, field, value });
-      if (!result.ok) toast.error(result.error ?? "Update failed.");
+      if (!result.ok) {
+        setOptimistic(prev);
+        toast.error(result.error ?? "Update failed.");
+      }
     });
   }
 
@@ -160,27 +174,25 @@ function Row({ item, onEdit }: { item: PantryItemView; onEdit: () => void }) {
             </Badge>
           ) : null}
         </div>
-        <div className="flex items-center gap-3 text-xs text-muted-foreground">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
           {quantityLabel && <span>{quantityLabel}</span>}
           <button
             type="button"
-            onClick={() => handleToggle("staple", !item.staple)}
-            disabled={busy}
+            onClick={() => handleToggle("staple", !optimistic.staple)}
             className={cn(
-              "inline-flex items-center gap-1 rounded-sm px-1 py-0.5 transition-colors hover:text-foreground",
-              item.staple && "text-amber-600",
+              "inline-flex min-h-8 items-center gap-1 rounded-md px-1.5 py-1 transition-colors hover:text-foreground active:bg-accent/60",
+              optimistic.staple && "text-amber-600",
             )}
           >
-            <Star className={cn("size-3", item.staple && "fill-current")} />
-            {item.staple ? "Staple" : "Make staple"}
+            <Star className={cn("size-3", optimistic.staple && "fill-current")} />
+            {optimistic.staple ? "Staple" : "Make staple"}
           </button>
           <button
             type="button"
-            onClick={() => handleToggle("lowStock", !item.lowStock)}
-            disabled={busy}
-            className="rounded-sm px-1 py-0.5 transition-colors hover:text-foreground"
+            onClick={() => handleToggle("lowStock", !optimistic.lowStock)}
+            className="inline-flex min-h-8 items-center rounded-md px-1.5 py-1 transition-colors hover:text-foreground active:bg-accent/60"
           >
-            {item.lowStock ? "Restocked" : "Mark low"}
+            {optimistic.lowStock ? "Restocked" : "Mark low"}
           </button>
         </div>
       </div>

@@ -33,12 +33,18 @@ export function BottomNav() {
             <li key={link.href} className="flex-1">
               <Link
                 href={link.href}
+                prefetch
                 className={cn(
-                  "flex h-full flex-col items-center justify-center gap-1 text-xs transition-colors",
+                  "flex h-full select-none flex-col items-center justify-center gap-1 text-xs transition-colors duration-150 ease-out active:bg-accent/50",
                   active ? "text-primary" : "text-muted-foreground hover:text-foreground",
                 )}
               >
-                <Icon className={cn("size-5", active && "fill-primary/10")} />
+                <Icon
+                  className={cn(
+                    "size-5 transition-transform duration-150 ease-out",
+                    active && "scale-110 fill-primary/10",
+                  )}
+                />
                 <span>{link.label}</span>
               </Link>
             </li>

@@ -58,10 +58,10 @@ export function StaplesPanel({ disabledStaples: initialDisabled }: Props) {
               onClick={() => toggle(s.normalized)}
               disabled={isPending}
               className={cn(
-                "inline-flex items-center gap-1 rounded-full border px-3 py-1 text-xs font-medium transition-colors",
+                "inline-flex min-h-9 select-none items-center gap-1 rounded-full border px-3 py-1.5 text-xs font-medium transition-[background-color,color,transform] duration-150 ease-out active:scale-95",
                 isDisabled
-                  ? "border-dashed border-muted-foreground/40 bg-muted/30 text-muted-foreground line-through"
-                  : "border-emerald-300 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 dark:bg-emerald-950/30 dark:text-emerald-200",
+                  ? "border-dashed border-muted-foreground/40 bg-muted/30 text-muted-foreground line-through active:bg-muted/50"
+                  : "border-emerald-300 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 active:bg-emerald-200 dark:bg-emerald-950/30 dark:text-emerald-200",
                 isPending && "opacity-60",
               )}
               aria-pressed={!isDisabled}

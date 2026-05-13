@@ -135,9 +135,10 @@ function SuggestionCard({ match }: { match: MatchResult }) {
   return (
     <Link
       href={`/recipes/${match.recipe.slug}`}
-      className="block h-full transition-transform hover:-translate-y-0.5"
+      prefetch
+      className="block h-full transition-transform duration-150 ease-out hover:-translate-y-0.5 active:scale-[0.98]"
     >
-      <Card className="h-full hover:shadow-md">
+      <Card className="h-full transition-shadow hover:shadow-md">
       <CardHeader>
         <div className="flex items-start justify-between gap-2">
           <CardTitle className="text-base leading-snug">{match.recipe.title}</CardTitle>
